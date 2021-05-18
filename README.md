@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# react-peaman
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is the web version of flutter-peaman app (https://github.com/shrijanregmi/flutter-peaman) made using ReactJs and NodeJs.
 
 ## Available Scripts
 
