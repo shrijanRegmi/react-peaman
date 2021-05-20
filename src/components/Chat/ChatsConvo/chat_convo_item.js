@@ -1,6 +1,6 @@
 import Avatar from "../../Common/avatar";
 
-const ChatConvoItemComponent = ({ isOwner }) => {
+const ChatConvoItemComponent = ({ isOwner, msg }) => {
   const className = isOwner
     ? "message-container-right"
     : "message-container-left";
@@ -12,9 +12,7 @@ const ChatConvoItemComponent = ({ isOwner }) => {
       }`}
     >
       <div className={`message-container ${className} text-start`}>
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-        eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-        voluptua. At vero eos et
+        {msg.text}
       </div>
       <div
         className={`user-details d-flex align-items-center mt-3 ${
@@ -33,6 +31,11 @@ const ChatConvoItemComponent = ({ isOwner }) => {
       </div>
     </div>
   );
+};
+
+ChatConvoItemComponent.defaultProps = {
+  isOwner: false,
+  msg: {},
 };
 
 export default ChatConvoItemComponent;

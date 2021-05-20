@@ -7,29 +7,14 @@ const Chat = () => {
   return (
     <div className="chat-page">
       <div className="chat-container">
-        <div className="d-flex items-container">
-          <div
-            className="flex-item"
-            style={{
-              flexGrow: "1",
-            }}
-          >
+        <div className="row items-container">
+          <div className="flex-item col-3">
             <ChatsListComponent />
           </div>
-          <div
-            className="flex-item"
-            style={{
-              flexGrow: "12",
-            }}
-          >
+          <div className="flex-item col-6">
             <ChatsConvoComponent />
           </div>
-          <div
-            className="flex-item"
-            style={{
-              flexGrow: "3",
-            }}
-          >
+          <div className="flex-item col-3">
             <ChatsConvoDetailsComponent />
           </div>
         </div>
