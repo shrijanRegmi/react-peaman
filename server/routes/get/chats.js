@@ -14,7 +14,15 @@ router.get("/", async (req, res) => {
       .orderBy("last_updated", "desc")
       .limit(parseInt(limit) || 10);
 
-    const chats = await getListFromRef(chatsRef);
+    const chatsFromCol = await getListFromRef(chatsRef);
+
+    const chats = [];
+
+    for (const chat of chatsFromCol) {
+      const friendId = chat.users.filter((itm) => itm != uid)[0];
+      const friend = await getDataFromCol("users", friendId);
+      chats.push({ ...chat, friend });
+    }
 
     console.log(chats);
     return res.status(200).send(chats);
