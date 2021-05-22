@@ -1,10 +1,23 @@
-import { GET_CHATS, GET_MESSAGES } from "./constants";
+import {
+  GET_CHATS,
+  GET_MESSAGES,
+  GET_SELECTEDCHAT,
+  UPDATE_CHAT_LOADER,
+} from "./constants";
 
-const getChats = (uid) => {
+const getChatsAction = (uid) => {
   return (dispatch) => {
-    fetch(`http://localhost:3001/chats?uid=${uid}&limit=2`)
+    dispatch(updateChatLoaderAction({ isLoadingChats: true }));
+    fetch(`http://localhost:3001/chats?uid=${uid}&limit=5`)
       .then((res) => res.json())
       .then((res) => {
+        if (res.length > 0)
+          dispatch({
+            type: GET_SELECTEDCHAT,
+            payload: {
+              selectedChat: res[0],
+            },
+          });
         dispatch({
           type: GET_CHATS,
           payload: {
@@ -12,12 +25,16 @@ const getChats = (uid) => {
           },
         });
       })
-      .catch((e) => console.log("Error!!: Getting chats", e));
+      .catch((e) => console.log("Error!!: Getting chats", e))
+      .finally(() => {
+        dispatch(updateChatLoaderAction({ isLoadingChats: false }));
+      });
   };
 };
 
-const getMessages = (chat_id) => {
+const getMessagesAction = (chat_id) => {
   return (dispatch) => {
+    dispatch(updateChatLoaderAction({ isLoadingMessages: true }));
     fetch(`http://localhost:3001/chats/${chat_id}/messages?limit=10`)
       .then((res) => res.json())
       .then((res) => {
@@ -29,8 +46,43 @@ const getMessages = (chat_id) => {
           },
         });
       })
-      .catch((e) => console.log("Error!!: Getting messages", e));
+      .catch((e) => console.log("Error!!: Getting messages", e))
+      .finally(() => {
+        dispatch(updateChatLoaderAction({ isLoadingMessages: false }));
+      });
   };
 };
 
-export { getChats, getMessages };
+const getSelectedChatAction = (chat_id) => {
+  return (dispatch, getState) => {
+    const {
+      chatsReducer: { chats },
+    } = getState();
+
+    const selectedChat = chats.find((itm) => itm.id === chat_id);
+
+    dispatch({
+      type: GET_SELECTEDCHAT,
+      payload: {
+        selectedChat: selectedChat,
+      },
+    });
+  };
+};
+
+const updateChatLoaderAction = ({ isLoadingChats, isLoadingMessages }) => {
+  return {
+    type: UPDATE_CHAT_LOADER,
+    payload: {
+      isLoadingChats,
+      isLoadingMessages,
+    },
+  };
+};
+
+export {
+  getChatsAction,
+  getMessagesAction,
+  getSelectedChatAction,
+  updateChatLoaderAction,
+};

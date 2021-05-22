@@ -1,6 +1,10 @@
 import express from "express";
 import admin from "../../configs/firebaseConfig.js";
-import { getDataFromCol, getListFromRef } from "../../utils/db_helper.js";
+import {
+  getDataFromCol,
+  getDataFromPath,
+  getListFromRef,
+} from "../../utils/db_helper.js";
 
 const router = express.Router();
 const ref = admin.firestore();
@@ -20,8 +24,13 @@ router.get("/", async (req, res) => {
 
     for (const chat of chatsFromCol) {
       const friendId = chat.users.filter((itm) => itm != uid)[0];
+      const { _path } = chat.last_msg_ref;
+      const { segments } = _path;
+      const lastMsgPath = segments.join("/");
+
+      const last_message = await getDataFromPath(lastMsgPath);
       const friend = await getDataFromCol("users", friendId);
-      chats.push({ ...chat, friend });
+      chats.push({ ...chat, friend, last_message });
     }
 
     console.log(chats);

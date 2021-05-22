@@ -14,6 +14,20 @@ const getDataFromCol = async (col, id) => {
   }
 };
 
+const getDataFromPath = async (path) => {
+  try {
+    const ref = admin.firestore().doc(path);
+
+    const snap = await ref.get();
+    if (snap.exists) {
+      const data = snap.data();
+      return data;
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 const getListFromRef = async (ref) => {
   const list = [];
   try {
@@ -32,4 +46,4 @@ const getListFromRef = async (ref) => {
   return list;
 };
 
-export { getDataFromCol, getListFromRef };
+export { getDataFromCol, getListFromRef, getDataFromPath };

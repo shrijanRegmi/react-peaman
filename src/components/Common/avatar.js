@@ -7,6 +7,7 @@ const Avatar = ({ imgUrl, radius, className }) => {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
+        backgroundColor: "var(--color-light-blue)",
         width: radius,
         height: radius,
         borderRadius: "50%",

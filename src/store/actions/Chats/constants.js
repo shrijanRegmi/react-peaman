@@ -1,2 +1,4 @@
 export const GET_CHATS = "GET_CHATS";
 export const GET_MESSAGES = "GET_MESSAGES";
+export const GET_SELECTEDCHAT = "GET_SELECTEDCHAT";
+export const UPDATE_CHAT_LOADER = "UPDATE_CHAT_LOADER";

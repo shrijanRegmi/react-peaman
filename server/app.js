@@ -12,6 +12,7 @@ app.use("/users", userRouter);
 app.use("/posts", postRouter);
 app.use("/chats", chatsRouter);
 app.use("/timeline", timelineRouter);
+app.use(express.static("../public/"))
 
 app.listen("3001", () => {
   console.log("LISTENING TO 3001");

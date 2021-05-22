@@ -1,6 +1,13 @@
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import Avatar from "../../Common/avatar";
+import Spinner from "../../Common/Spinner/spinner";
 
 const ChatConvoItemComponent = ({ isOwner, msg }) => {
+  const selectedChat = useSelector((state) => state.chatsReducer.selectedChat);
+  const user = useSelector((state) => state.usersReducer.user);
+  const [loadingImg, setLoadingImg] = useState(true);
+
   const className = isOwner
     ? "message-container-right"
     : "message-container-left";
@@ -12,7 +19,25 @@ const ChatConvoItemComponent = ({ isOwner, msg }) => {
       }`}
     >
       <div className={`message-container ${className} text-start`}>
-        {msg.text}
+        {msg.type == 0 ? (
+          msg.text
+        ) : (
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+            }}
+          >
+            <img
+              src={msg.text}
+              width="100%"
+              height={"100%"}
+              className={loadingImg ? "d-none" : "d-block"}
+              onLoad={() => setLoadingImg(false)}
+            />
+            <Spinner loading={loadingImg} color={isOwner ? null : "#fff"} />
+          </div>
+        )}
       </div>
       <div
         className={`user-details d-flex align-items-center mt-3 ${
@@ -20,11 +45,13 @@ const ChatConvoItemComponent = ({ isOwner, msg }) => {
         }  `}
       >
         <div className={`text-${isOwner ? "end" : "start"} mx-3`}>
-          <p className="username">Me</p>
+          <p className="username">
+            {isOwner ? "Me" : selectedChat.friend.name}
+          </p>
           <p className="message-time">1m ago</p>
         </div>
         <Avatar
-          imgUrl="https://www.mantruckandbus.com/fileadmin/media/bilder/02_19/219_05_busbusiness_interviewHeader_1485x1254.jpg"
+          imgUrl={isOwner ? user.photoUrl : selectedChat.friend.photoUrl}
           radius="50px"
           className="ml-3"
         />
