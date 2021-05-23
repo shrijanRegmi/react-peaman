@@ -19,7 +19,7 @@ const ChatConvoItemComponent = ({ isOwner, msg }) => {
       }`}
     >
       <div className={`message-container ${className} text-start`}>
-        {msg.type == 0 ? (
+        {msg.type === 0 ? (
           msg.text
         ) : (
           <div
