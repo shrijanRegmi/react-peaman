@@ -94,8 +94,6 @@ router.get("/:chatId/messages/:id", async (req, res) => {
     }
 
     return res.status(404).send("Message not found");
-
-    return res.status(200).send(messages);
   } catch ({ message }) {
     return res.status(400).send(message);
   }

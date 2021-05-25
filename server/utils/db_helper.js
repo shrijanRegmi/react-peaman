@@ -46,4 +46,28 @@ const getListFromRef = async (ref) => {
   return list;
 };
 
-export { getDataFromCol, getListFromRef, getDataFromPath };
+const saveDataToDoc = async (ref, data) => {
+  try {
+    const result = await ref.set(data);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const updateDataToDoc = async (ref, data) => {
+  try {
+    const result = await ref.update(data);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export {
+  getDataFromCol,
+  getListFromRef,
+  getDataFromPath,
+  saveDataToDoc,
+  updateDataToDoc,
+};
