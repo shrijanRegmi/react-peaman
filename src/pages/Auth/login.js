@@ -2,22 +2,58 @@ import Button from "../../components/Common/Button/button";
 import Input from "../../components/Common/Input/input";
 import "./style.scss";
 import { ReactComponent as AuthBottom } from "../../assets/svgs/auth_bottom.svg";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import loginUserAction from "../../store/actions/Auth";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const Login = () => {
+  const [formState, setFormState] = useState({
+    email: "",
+    password: "",
+  });
+  const user = useSelector((state) => state.usersReducer.user);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (user.uid) history.replace("/chats");
+  }, [user]);
+
+  const dispatch = useDispatch();
+
+  const handleOnChange = (data) => {
+    const newFormState = { ...formState, [data.name]: data.value };
+    setFormState(newFormState);
+  };
+
+  const handleLogin = () => {
+    dispatch(loginUserAction(formState));
+  };
+
   return (
     <div className="auth-page">
       <div className="peaman-container text-start">
         <h2>LOGIN</h2>
 
         <div className="auth-container mt-5 mb-4">
-          <Input placeholder="Email" className="mb-5" />
-          <Input placeholder="Password" type="password" />
+          <Input
+            placeholder="Email"
+            className="mb-5"
+            name="email"
+            onChange={handleOnChange}
+          />
+          <Input
+            placeholder="Password"
+            type="password"
+            name="password"
+            onChange={handleOnChange}
+          />
         </div>
 
         <div className="d-flex justify-content-end mb-4">Forget password ?</div>
 
-        <Button value="Log in" />
+        <Button value="Log in" onClick={handleLogin} />
 
         <div className="text-center my-4">
           New user ?{" "}

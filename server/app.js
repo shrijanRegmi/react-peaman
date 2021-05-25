@@ -1,6 +1,6 @@
 import cors from "cors";
 import express from "express";
-import bodyParser from 'body-parser';
+import bodyParser from "body-parser";
 
 // get routes start
 import userRouter from "./routes/get/users.js";
@@ -10,13 +10,15 @@ import timelineRouter from "./routes/get/timeline.js";
 // get routes end
 
 // post routes start
+import authRouter from "./routes/post/auth.js";
 import chatsPostRouter from "./routes/post/chats.js";
 // post routes end
 
 const app = express();
 
 app.use(cors());
-app.use(express.json())
+app.use(express.json());
+app.use("/auth", authRouter);
 app.use("/users", userRouter);
 app.use("/posts", postRouter);
 app.use("/chats", chatsRouter, chatsPostRouter);
