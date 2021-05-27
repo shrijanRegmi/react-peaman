@@ -7,6 +7,7 @@ import userRouter from "./routes/get/users.js";
 import postRouter from "./routes/get/posts.js";
 import chatsRouter from "./routes/get/chats.js";
 import timelineRouter from "./routes/get/timeline.js";
+import searchRouter from "./routes/get/search.js";
 // get routes end
 
 // post routes start
@@ -20,6 +21,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/auth", authRouter);
 app.use("/users", userRouter);
+app.use("/search", searchRouter);
 app.use("/posts", postRouter);
 app.use("/chats", chatsRouter, chatsPostRouter);
 app.use("/timeline", timelineRouter);

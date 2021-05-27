@@ -1,0 +1,51 @@
+.peaman-search {
+  position: relative;
+  .peaman-search-input-container {
+    width: 100%;
+    padding: 20px;
+    background-color: var(--color-light-blue);
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+
+  .peaman-search-results-container {
+    display: none;
+    width: 100%;
+    height: 400px;
+    position: absolute;
+    z-index: 2;
+    background-color: var(--color-light-blue);
+    border-radius: 20px;
+    box-shadow: 1px 1px 10px #cccccc;
+    padding: 20px;
+    overflow-y: auto;
+
+    p {
+      color: var(--color-grey);
+      text-align: start;
+      margin: 0px;
+    }
+
+    .user-item-container {
+      padding: 6px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+
+      p {
+        color: black;
+        margin-left: 10px;
+      }
+      &:hover {
+        background-color: #e6e6ee;
+      }
+    }
+  }
+
+  input,
+  input:focus {
+    outline: none;
+    background-color: var(--color-light-blue);
+    border: none;
+    width: 100%;
+  }
+}
