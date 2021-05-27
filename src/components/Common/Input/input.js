@@ -1,6 +1,14 @@
 import "./style.scss";
 
-const Input = ({ placeholder, type, style, className, onChange, name }) => {
+const Input = ({
+  placeholder,
+  type,
+  style,
+  className,
+  onChange,
+  name,
+  required,
+}) => {
   const handleOnChange = (e) => {
     onChange({ name: e.target.name, value: e.target.value });
   };
@@ -13,6 +21,7 @@ const Input = ({ placeholder, type, style, className, onChange, name }) => {
           placeholder={placeholder}
           onChange={handleOnChange}
           name={name}
+          required={required}
         />
       </div>
     </div>
@@ -23,6 +32,7 @@ Input.defaultProps = {
   placeholder: "",
   type: "text",
   name: "",
+  required: false,
   onChange: () => {},
 };
 

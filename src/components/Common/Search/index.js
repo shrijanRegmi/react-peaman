@@ -60,7 +60,13 @@ const SearchComponent = () => {
                   key={user.uid}
                   className="d-flex my-2 align-items-center w-100 user-item-container"
                 >
-                  <Avatar imgUrl={user.photoUrl} radius={30} />
+                  <Avatar
+                    imgUrl={user.photoUrl}
+                    radius={30}
+                    style={{
+                      backgroundColor: "var(--color-light-grey)",
+                    }}
+                  />
                   <p>{user.name}</p>
                 </div>
               );

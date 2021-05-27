@@ -18,15 +18,20 @@ const getUserAction = (uid) => {
 };
 
 const searchUsersAction = (keyword) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch(updateUserLoaderAction({ isSearchingUser: true }));
+    const {
+      usersReducer: { user },
+    } = getState();
 
     fetch(`http://localhost:3001/search?keyword=${keyword}`)
       .then((res) => res.json())
       .then(({ users }) => {
         dispatch({
           type: SEARCH_USERS,
-          payload: { searchedUsers: users },
+          payload: {
+            searchedUsers: users.filter((itm) => itm.uid !== user.uid),
+          },
         });
         dispatch(updateUserLoaderAction({ isSearchingUser: false }));
       })

@@ -13,12 +13,18 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
   const user = useSelector((state) => state.usersReducer.user);
   const history = useHistory();
+  const errorMessage = useSelector((state) => state.errorReducer.message);
 
   useEffect(() => {
     if (user.uid) history.replace("/chats");
   }, [user]);
+
+  useEffect(() => {
+    if (errorMessage !== "") setIsLoading(false);
+  }, [errorMessage]);
 
   const dispatch = useDispatch();
 
@@ -28,7 +34,10 @@ const Login = () => {
   };
 
   const handleLogin = () => {
-    dispatch(loginUserAction(formState));
+    if (formState.email !== "" && formState.password !== "") {
+      setIsLoading(true);
+      dispatch(loginUserAction(formState));
+    }
   };
 
   return (
@@ -41,6 +50,7 @@ const Login = () => {
             placeholder="Email"
             className="mb-5"
             name="email"
+            required={true}
             onChange={handleOnChange}
           />
           <Input
@@ -53,7 +63,7 @@ const Login = () => {
 
         <div className="d-flex justify-content-end mb-4">Forget password ?</div>
 
-        <Button value="Log in" onClick={handleLogin} />
+        <Button value="Log in" onClick={handleLogin} loading={isLoading} />
 
         <div className="text-center my-4">
           New user ?{" "}

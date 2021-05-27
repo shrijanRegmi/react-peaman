@@ -1,4 +1,4 @@
-const Avatar = ({ imgUrl, radius, className }) => {
+const Avatar = ({ imgUrl, radius, className, style }) => {
   return (
     <div
       className={`peaman-avatar ${className}`}
@@ -11,6 +11,7 @@ const Avatar = ({ imgUrl, radius, className }) => {
         width: radius,
         height: radius,
         borderRadius: "50%",
+        ...style,
       }}
     ></div>
   );
