@@ -1,5 +1,5 @@
 import ChatConvoItemComponent from "./chat_convo_item";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMessagesAction } from "../../../store/actions/Chats";
 import Scrollbars from "react-custom-scrollbars";

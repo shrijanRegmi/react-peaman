@@ -39,11 +39,11 @@ const chatsReducer = (state = initState, action) => {
       return {
         ...state,
         isLoadingChats:
-          payload.isLoadingChats != undefined
+          payload.isLoadingChats !== undefined
             ? payload.isLoadingChats
             : state.isLoadingChats,
         isLoadingMessages:
-          payload.isLoadingMessages != undefined
+          payload.isLoadingMessages !== undefined
             ? payload.isLoadingMessages
             : state.isLoadingMessages,
       };

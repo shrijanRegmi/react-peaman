@@ -28,7 +28,7 @@ const ChatListItem = ({ chat }) => {
         <div className="mx-3">
           <h6 className="mb-0">{chat.friend.name}</h6>
           <p className="mb-0">
-            {chat.last_message.type == 0
+            {chat.last_message.type === 0
               ? chat.last_message.text.length >= 15
                 ? `${chat.last_message.text.substring(0, 15)}...`
                 : chat.last_message.text

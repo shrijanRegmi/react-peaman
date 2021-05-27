@@ -18,7 +18,7 @@ const SearchComponent = () => {
   const handleOnChange = (e) => {
     const value = e.target.value;
 
-    if (value == "") {
+    if (value === "") {
       searchResultContainer.current.style.display = "none";
     } else {
       dispatch(searchUsersAction(value));
